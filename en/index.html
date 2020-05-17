@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idioms 😱</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Indie+Flower&display=swap" rel="stylesheet">
+    <style>
+
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            height: 100%;
+            background-color: darkorange;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        main section {
+            box-sizing: border-box;
+            padding: 1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 5vw;
+            transition: all ease-out 1s;
+        }
+        section#idiom {
+            font-family: 'Indie Flower', cursive;
+            background-color: royalblue;
+            height: 100%;
+        }
+        section#meaning {
+            font-family: 'Baloo 2', cursive;
+            color: darkorange;
+            height: 0%;
+            display: none;
+        }
+        button {
+            position: absolute;
+            height: 64px;
+            width: 64px;
+            border-radius: 32px;
+            box-sizing: border-box;
+            overflow: hidden;
+            font-size: 2em;
+            background: none;
+        }
+
+        button.ok {
+            bottom: 2em;
+            right: 2em;
+        }
+        button.ok + span {         
+            font-family: Arial, Helvetica, sans-serif;   
+            box-sizing: border-box;
+            position: absolute;
+            bottom: 1em;
+            right: 2em;
+            font-size: 1.5em;
+            background: none;
+        }
+
+        button.no {
+            bottom: 2em;
+            left: 2em;
+        }
+        button.no + span {         
+            font-family: Arial, Helvetica, sans-serif;   
+            box-sizing: border-box;
+            position: absolute;
+            bottom: 1em;
+            left: 2em;
+            font-size: 1.5em;
+            background: none;
+        }
+
+        button.meh {
+            bottom: 2em;
+            left: calc(50% - 32px);            
+        }
+        button.meh + span {         
+            font-family: Arial, Helvetica, sans-serif;   
+            box-sizing: border-box;
+            position: absolute;
+            bottom: 1em;
+            left: calc(50% - 32px - 1.5em);    
+            font-size: 1.5em;
+            background: none;
+        }
+
+        footer {
+            display: none;
+            transition: opacity ease-in-out 1s;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section id="idiom">
+            be my guest
+        </section>
+        <section id="meaning">
+            do what you want; feel free; help yourself
+        </section>
+    </main>
+
+    <footer>
+        <button class="no">🥴</button>
+        <span>No idea!</span>
+        
+        <button class="meh">🤔</button>
+        <span>Wasn't sure</span>
+
+        <button class="ok">😀</button>
+        <span>I knew it!</span>
+    </footer>
+
+    <script src="index.js" type="module"></script>
+</body>
+</html>
