@@ -14,33 +14,26 @@ let counter = 0;
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    ok.addEventListener('click', (e) => {
-        buttons.style.display = 'none';
-        meaning.style.height = '0';
-        meaning.style.display = 'none';
-        idiom.style.height = '100%';
-        register();
-        nextIdiom();
-    });
+    ok.addEventListener('click', (e) => register(1));
+    no.addEventListener('click', (e) => register(-1));
+    meh.addEventListener('click', (e) => register(0));
 
     idiom.addEventListener('click', (e) => {
         meaning.style.height = '67%';
         meaning.style.display = 'flex';
-        meaning.style.color = 'black';
+        meaning.style.color = 'white';
         idiom.style.height = '33%';
         buttons.style.display = 'block';
     });
 
-    const store = localStorage.getItem('idioms');
-    if (store) {
-        idioms = JSON.parse(store);
-    }
     list = Object.keys(idioms);
+    
     const len = list.length;
     for (let i = 0; i < len; i++) {
         const o = parseInt(Math.random() * len);
         [list[i], list[o]] = [list[o], list[i]];
-    }    
+    }
+
     nextIdiom();
 }
 
@@ -50,6 +43,15 @@ function nextIdiom() {
     counter++;
 }
 
-function register() {
-    
+function setup() {
+    buttons.style.display = 'none';
+    meaning.style.height = '0';
+    meaning.style.display = 'none';
+    idiom.style.height = '100%';
+}
+
+function register(v) {
+    setup();
+    // registrar a pontuação
+    nextIdiom();
 }
