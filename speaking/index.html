@@ -6,122 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Indie+Flower&display=swap" rel="stylesheet">
-  <style>
-    * { 
-      -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none;
-    }
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-    main {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-image: linear-gradient(to right top, #647da3, #38a2c4, #07c6c5, #6fe4a8, #d4f884);
-    }
-    button {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      border: 3px solid black;
-      font-size: 60px;
-      background-color: rgb(255,255,255,0.5);
-      transition: background-color 0.5s ease-out ;
-      background-image: url('microphone.png');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 60px;
-    }
-    button.pressing {
-      background-color: lightcoral;
-      border-color: darkred;
-    }
-    button:focus {
-      outline: none;
-    }
-    section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-evenly;
-      height: 320px;
-    }
-    section > * {
-      display: block;
-      margin: 0;
-      padding: 0;
-    }
-    section > p {
-      font-size: 32px;
-      /* text-transform: uppercase; */
-    }
-    section > p:first-child {
-      font-family: 'Indie Flower', cursive;
-    }
-    section > p:last-child {
-      font-family: 'Baloo 2', cursive;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
   <main>
     <section>
-      <p class="input">Test</p>
-      <button></button>
-      <p class="output">...</p>
+      <p class="input">
+        Test
+      </p>
+      <p class="output">
+        Press and hold the mic.
+      </p>
     </section>
   </main>
   
-  <script>
-    const bt = document.querySelector('button');
+  <button id="next">Next</button>
+  <button id="record"></button>
 
-    const pressing = (e) => {
-      bt.classList.add('pressing');
-      recognition.start();
-    };
-    const releasing = (e) => {
-      bt.classList.remove('pressing');
-      recognition.stop();
-    };
-    bt.addEventListener('mousedown', pressing);
-    bt.addEventListener('touchstart', pressing);
-
-    document.addEventListener('mouseup', releasing);
-    document.addEventListener('touchend', releasing);
-
-    const input = document.querySelector('p.input');
-    const output = document.querySelector('p.output');
-    const recognition = new webkitSpeechRecognition();
-    // recognition.continuous = false;
-    // recognition.interimResults = true;
-    recognition.onresult = function (e) {
-      console.log(e);
-      if (e.returnValue) {
-        if (e.results[0] && e.results[0].isFinal) {
-          output.textContent = e.results[0][0].transcript
-            + ` (${Math.floor(e.results[0][0].confidence * 100)}%)`;
-        }
-      }
-    }
-
-
-
-    input.addEventListener('click', e => {
-      const utter = new SpeechSynthesisUtterance(input.textContent);
-      utter.rate = 0.5;
-      speechSynthesis.speak(utter);
-    });
-  </script>
+  <script src="script.js" type="module"></script>
 </body>
 
 </html>
