@@ -1,17 +1,12 @@
 import sentences from './sentences.js';
 import Levenshtein from './levenshtein.js';
 
-console.log(Levenshtein);
-
 const divGrade = document.querySelector('div#grade');
 const input = document.querySelector('p.input');
 const output = document.querySelector('p.output');
 let spans;
 
-document.addEventListener('DOMContentLoaded', e => {
-  // input.textContent = sentences[0];
-  next();
-});
+document.addEventListener('DOMContentLoaded', next);
 
 const bt = document.querySelector('button#record');
 
@@ -53,6 +48,15 @@ const recognition = new webkitSpeechRecognition();
 recognition.lang = 'en-GB';
 // recognition.continuous = false;
 // recognition.interimResults = true;
+recognition.onstart = function(e) {
+  output.textContent = 'You can read the phrase out loud.';
+}
+
+recognition.onerror = function (e) {
+  console.log(e);
+  output.textContent = 'Try again.';
+}
+
 recognition.onresult = function (e) {
   console.log(e);
   if (e.returnValue) {
