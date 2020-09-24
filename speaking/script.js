@@ -1,34 +1,24 @@
-import sentences from './sentences.js';
 import Levenshtein from './levenshtein.js';
 
 const divGrade = document.querySelector('div#grade');
+const textarea = document.querySelector('textarea');
 const input = document.querySelector('p.input');
 const output = document.querySelector('p.output');
 let spans;
 
-document.addEventListener('DOMContentLoaded', next);
-
 const bt = document.querySelector('button#record');
-
-let p = 0;
-function next(e) {
-  const content = sentences[p++] || 'There are no more sentences.';
-  input.innerHTML = spanify(content);
-  spans = input.querySelectorAll('span');
-  divGrade.style.display = 'none';
-  spans.forEach(span => {
-    span.classList.remove('good', 'reasonable', 'weak');
-  })
-  // highlightResults('metapor for device imagination retoric');
-}
-
-document.querySelector('button#next').addEventListener('click', next);
 
 function spanify(sentence) {
   return sentence.replace(/(\w+)/g, '<span>$&</span>');
 }
 
 const pressing = (e) => {
+  input.innerHTML = spanify(input.textContent);
+  spans = input.querySelectorAll('span');
+  divGrade.style.display = 'none';
+  // spans.forEach(span => {
+  //   span.classList.remove('good', 'reasonable', 'weak');
+  // });
   bt.classList.add('pressing');
   recognition.start();
 };
@@ -45,7 +35,7 @@ document.addEventListener('mouseup', releasing);
 document.addEventListener('touchend', releasing);
 
 const recognition = new webkitSpeechRecognition();
-recognition.lang = 'en-GB';
+// recognition.lang = 'en-GB';
 // recognition.continuous = false;
 // recognition.interimResults = true;
 recognition.onstart = function(e) {
@@ -70,11 +60,20 @@ recognition.onresult = function (e) {
 }
 
 input.addEventListener('click', e => {
-  const utter = new SpeechSynthesisUtterance(input.textContent);
-  utter.rate = 0.5;
-  utter.voice = speechSynthesis.getVoices().find(v => v.lang === 'en-GB');
-  speechSynthesis.speak(utter);
+  textarea.style.display = 'block';
+  input.style.display = 'none';
+  textarea.value = input.textContent;
+  textarea.select();
+  textarea.focus();
+  e.stopPropagation();
 });
+
+document.body.addEventListener('click', e => {
+  if (e.target === textarea || e.target === bt) return;
+  input.innerHTML = textarea.value;
+  input.style.display = 'block';
+  textarea.style.display = 'none';
+}, false);
 
 function highlightResults(result) {
   const words = result.split(' ');

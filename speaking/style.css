@@ -69,12 +69,8 @@ button {
   bottom: 20px;
 }
 
-button#next {
-  left: 20px;
-}
-
 button#record {
-  right: 20px;
+  right: calc(50% - 50px);
   transition: background-color 0.5s ease-out ;
   background-image: url('microphone.png');
   background-repeat: no-repeat;
@@ -105,15 +101,22 @@ section > * {
     margin: 0;
     padding: 0;
 }
-section > p {
+
+section, textarea {
     font-size: 28px;
     text-align: center;
 }
 
-section > p:first-child {
+p.input, textarea {
     font-family: 'Indie Flower', cursive;
     margin-bottom: 20px;
 }
-section > p:last-child {
+
+p.output {
     font-family: 'Baloo 2', cursive;
+}
+
+textarea {
+  display: none;
+  width: 100%;
 }
